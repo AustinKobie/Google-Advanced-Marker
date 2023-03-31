@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./views/Home";
 import { AuthContext } from "./contexts/AuthProvider";
-import Places from "./components/Places";
+// import Places from "./components/Places";
 import Map from "./components/Map";
 
 function App() {

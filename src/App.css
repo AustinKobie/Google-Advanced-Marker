@@ -96,7 +96,7 @@ Map start
 #map {
   height: 96vh;
   width: 75%;
-  top: 10px;
+  top: -21px;
   left: 69px;
 }
 
@@ -172,6 +172,7 @@ Marker start
 .marker.highlight:after {
   opacity: 0;
   animation: fadeOut 0.5s;
+  border-top: 9px solid #228def;
 }
 
 .marker h2 {
