@@ -1,3 +1,4 @@
+/* global google */
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { useRef, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
@@ -15,11 +16,12 @@ export default function Map() {
 }
 
 const mapOptions = {
-  mapid: process.env.REACT_APP_PUBLIC_MAP_ID,
+  mapId: process.env.REACT_APP_PUBLIC_MAP_ID,
   center: { lat: 26.6406, lng: -81.8723 },
   zoom: 10,
-  disableDefaultUI: true,
+  
 };
+
 
 function MyMap() {
   const [map, setMap] = useState();
@@ -42,6 +44,14 @@ const constructData = {
     name: "Bonita Bay Construction Entrance",
     position: { lat: 26.34882, lng: -81.81001 },
   },
+  B: {
+    name: "The Villages at Country Creek Construction Entrance",
+    position: { lat: 26.43169, lng: -81.79461 }, 
+  },
+  C: {
+    name: "Fiddler's Creek Construction Entrance",
+    position: { lat: 26.03381, lng: -81.65539 },
+  }
 };
 
 function Construction({ map }) {
@@ -60,27 +70,26 @@ function Construction({ map }) {
   );
 }
 
-function Marker({ map, children, position }) {
-  const markerRef = useRef();
-  const rootRef = useRef();
+function Marker({map, children, position}) {
+const markerRef = useRef();
+const rootRef = useRef();
 
   useEffect(() => {
     if (!rootRef.current) {
       const container = document.createElement('div');
       rootRef.current = createRoot(container);
 
-      markerRef.current = new window.google.maps.Marker({
+      markerRef.current = new google.maps.marker.AdvancedMarkerView({
         position,
-        map,
-      });
+        content : container,
+      })
     }
-  }, [map, position]);
+  }, [])
 
   useEffect(() => {
     rootRef.current.render(children);
-  }, [children]);
-
-  return <div ref={markerRef} />;
+    markerRef.current.position = position;
+    markerRef.current.map = map
+  }, [map, position, children])
 }
-
 
